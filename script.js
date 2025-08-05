@@ -37,3 +37,52 @@ const plan = [
   },
   // Puedes seguir agregando más semestres aquí si es necesario...
 ];
+
+const estado = JSON.parse(localStorage.getItem("estadoAprobado")) || {};
+
+function guardarEstado() {
+  localStorage.setItem("estadoAprobado", JSON.stringify(estado));
+}
+
+function puedeInscribir(ramo) {
+  if (!ramo.prereqs) return true;
+  return ramo.prereqs.every(pr => estado[pr]);
+}
+
+function render() {
+  const contenedor = document.getElementById("grid-container");
+  contenedor.innerHTML = "";
+
+  plan.forEach(function(bloque) {
+    const col = document.createElement("div");
+    col.className = "semestre";
+    const titulo = document.createElement("h2");
+    titulo.textContent = "Semestre " + bloque.semestre;
+    col.appendChild(titulo);
+
+    bloque.ramos.forEach(function(r) {
+      const ramo = typeof r === "string" ? { nombre: r, prereqs: [] } : r;
+      const div = document.createElement("div");
+      div.className = "asignatura";
+      div.textContent = ramo.nombre;
+
+      if (estado[ramo.nombre]) {
+        div.classList.add("aprobada");
+      } else if (puedeInscribir(ramo)) {
+        div.classList.add("habilitada");
+      }
+
+      div.onclick = function() {
+        estado[ramo.nombre] = !estado[ramo.nombre];
+        guardarEstado();
+        render();
+      };
+
+      col.appendChild(div);
+    });
+
+    contenedor.appendChild(col);
+  });
+}
+
+render();
