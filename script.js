@@ -1,79 +1,39 @@
+// Datos del plan extraídos del CSV
 const plan = [
   {
-    semestre: 1,
-    ramos: [
+    "semestre": 1,
+    "ramos": [
       "Psicología Social",
       "Biología Celular Básica",
       "Anatomía General",
       "Física General",
-      "Introducción a la Fonoaudiología"
+      "Introducción a la Fonoaudiología",
+      "Linguística General"
     ]
   },
   {
-    semestre: 2,
-    ramos: [
-      { nombre: "Fisiología Humana", prereqs: ["Biología Celular Básica", "Anatomía General"] },
-      { nombre: "Neuroanatomía", prereqs: ["Anatomía General"] },
-      { nombre: "Psicología del Desarrollo", prereqs: ["Psicología Social"] },
-      { nombre: "Audiología Básica", prereqs: ["Física General"] },
-      { nombre: "Fonética y Fonología General", prereqs: ["Introducción a la Fonoaudiología"] }
+    "semestre": 2,
+    "ramos": [
+      { "nombre": "Fonética - Fonología I", "prereqs": ["Linguística General"] },
+      { "nombre": "Morfosintaxis I", "prereqs": ["Linguística General"] },
+      { "nombre": "Acústica Física", "prereqs": ["Física General"] },
+      { "nombre": "Anatomía de los Órganos Fonoarticulatorios", "prereqs": ["Anatomía General"] },
+      { "nombre": "Fisiología humana", "prereqs": ["Biología Celular Básica"] },
+      "Psicología Evolutiva",
+      { "nombre": "Bioética y Profesionalismo", "prereqs": ["Introducción a la Fonoaudiología"] }
     ]
-  }
+  },
+  {
+    "semestre": 3,
+    "ramos": [
+      { "nombre": "Fonética - Fonología II", "prereqs": ["Fonética - Fonología I"] },
+      { "nombre": "Morfosintaxis II", "prereqs": ["Morfosintaxis I"] },
+      { "nombre": "Semántica y Pragmática", "prereqs": ["Linguística General"] },
+      { "nombre": "Sistema Estomatognático - Fonoaudiología", "prereqs": ["Anatomía de los Órganos Fonoarticulatorios", "Fisiología humana"] },
+      { "nombre": "Fisiopatología Humana", "prereqs": ["Fisiología humana"] },
+      { "nombre": "Neuroanatomía", "prereqs": ["Anatomía de los Órganos Fonoarticulatorios"] },
+      { "nombre": "Psicolingüística", "prereqs": ["Fonética - Fonología I", "Morfosintaxis I"] }
+    ]
+  },
+  // Puedes seguir agregando más semestres aquí si es necesario...
 ];
-
-const estado = JSON.parse(localStorage.getItem("estadoAprobado")) || {};
-
-function guardarEstado() {
-  localStorage.setItem("estadoAprobado", JSON.stringify(estado));
-}
-
-function puedeInscribir(ramo) {
-  if (!ramo.prereqs) return true;
-  return ramo.prereqs.every(pr => estado[pr]);
-}
-
-function render() {
-  const contenedor = document.getElementById("plan-container");
-  contenedor.innerHTML = "";
-
-  plan.forEach(bloque => {
-    const div = document.createElement("div");
-    div.className = "semestre";
-    const titulo = document.createElement("h2");
-    titulo.textContent = `Semestre ${bloque.semestre}`;
-    div.appendChild(titulo);
-
-    bloque.ramos.forEach(r => {
-      const ramo = typeof r === "string" ? { nombre: r, prereqs: [] } : r;
-      const fila = document.createElement("div");
-      fila.className = "asignatura";
-
-      const nombre = document.createElement("span");
-      nombre.textContent = ramo.nombre;
-
-      if (estado[ramo.nombre]) {
-        nombre.classList.add("aprobada");
-        nombre.textContent += " ✅";
-      } else if (puedeInscribir(ramo)) {
-        nombre.classList.add("habilitada");
-        nombre.textContent += " (Disponible)";
-      }
-
-      const boton = document.createElement("button");
-      boton.textContent = estado[ramo.nombre] ? "Desmarcar" : "Aprobar";
-      boton.onclick = () => {
-        estado[ramo.nombre] = !estado[ramo.nombre];
-        guardarEstado();
-        render();
-      };
-
-      fila.appendChild(nombre);
-      fila.appendChild(boton);
-      div.appendChild(fila);
-    });
-
-    contenedor.appendChild(div);
-  });
-}
-
-render();
