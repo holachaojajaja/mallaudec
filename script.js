@@ -54,7 +54,7 @@ const plan = [
       { nombre: "Lenguaje y Habla Infanto-Juvenil", prereqs: ["Psicolingüística Evolutiva", "Análisis del Discurso Oral", "Semántica y Pragmática"] },
       { nombre: "Lenguaje y Habla en Adultos I", prereqs: ["Neurología y Fonoaudiología", "Neurolingüística"] },
       { nombre: "Voz I", prereqs: ["Análisis Acústico de la Fonoarticulación", "Sistema Estomatognático - Fonoaudiología", "Fisiopatología Humana"] },
-      { nombre: "Funciones Orofaciales", prereqs: ["Neurología y Fonoaudiología", "Sistema Estomatognático - Fonoaudiología", "Fisiopatología Humana"] },
+      { nombre: "Funciones Orofaciales I", prereqs: ["Neurología y Fonoaudiología", "Sistema Estomatognático - Fonoaudiología", "Fisiopatología Humana"] },
       { nombre: "Salud Pública y Fonoaudiología", prereqs: ["Taller Integrador de Fonoaudiología I"] },
       "Sistema Educacional Chileno y Fonoaudiología",
       "Inglés Comunicativo I (Nivel Principiante)"
@@ -66,7 +66,7 @@ const plan = [
       { nombre: "Lenguaje y Habla Infanto-Juvenil II", prereqs: ["Lenguaje y Habla Infanto-Juvenil"] },
       { nombre: "Lenguaje y Habla en Adultos II", prereqs: ["Lenguaje y Habla en Adultos I"] },
       { nombre: "Voz II", prereqs: ["Voz I"] },
-      { nombre: "Funciones Orofaciales", prereqs: ["Funciones Orofaciales II"] },
+      { nombre: "Funciones Orofaciales II", prereqs: ["Funciones Orofaciales I"] },
       { nombre: "Sistema Auditivo y Vestibular I", prereqs: ["Taller Integrador de Fonoaudiología I"] },
       { nombre: "Metodología de la Investigación", prereqs: ["Taller Integrador de Fonoaudiología I"] },
       { nombre: "Inglés Comunicativo II (Nivel Elemental)", prereqs: ["Inglés Comunicativo II (Nivel Elemental)"] }
@@ -78,7 +78,7 @@ const plan = [
       { nombre: "Lenguaje y Habla Infanto-Juvenil III", prereqs: ["Lenguaje y Habla Infanto-Juvenil II"] },
       { nombre: "Lenguaje y Habla en Adultos III", prereqs: ["Lenguaje y Habla en Adultos II"] },
       { nombre: "Voz III", prereqs: ["Voz II"] },
-      { nombre: "Funciones Orofaciales III", prereqs: ["Fonética - Fonología II"] },
+      { nombre: "Funciones Orofaciales III", prereqs: ["Funciones Orofaciales II","Fonética - Fonología II"] },
       { nombre: "Sistema Auditivo y Vestibular II", prereqs: ["Sistema Auditivo y Vestibular I"] },
       { nombre: "Seminario de Investigación", prereqs: ["Metodología de la Investigación"] }
     ]
