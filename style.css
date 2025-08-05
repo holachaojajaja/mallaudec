@@ -28,39 +28,44 @@ h1 {
 }
 
 #grid-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr); /* 9 columnas iguales */
+  gap: 10px;
   padding: 10px;
+  max-width: 100%;
 }
 
 .semestre {
-  min-width: 250px;
   background-color: #dff0ff;
   border-radius: 10px;
-  padding: 10px;
-  flex-shrink: 0;
+  padding: 6px;
 }
 
 .semestre h2 {
   text-align: center;
+  font-size: 14px;
   color: #1a5276;
+  margin-bottom: 8px;
 }
 
 .asignatura {
   background-color: #F0F8FF;
-  border: 2px solid #3498db;
-  border-radius: 8px;
-  margin: 8px 0;
-  padding: 10px;
+  border: 2px solid #88A6BE;
+  border-radius: 6px;
+  margin: 6px 0;
+  padding: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
   text-align: center;
+  font-size: 12px;
   font-weight: 500;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .asignatura.habilitada {
   background-color: #87CEEB;
+  border-color: #23A1D3;
 }
 
 .asignatura.aprobada {
